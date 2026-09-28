@@ -1,0 +1,26 @@
+{
+  "name": "cse-341-final-project",
+  "version": "1.0.0",
+  "description": "This is the team repository for CSE 341 final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garrett-peterson/cse-341-final-project.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/garrett-peterson/cse-341-final-project/issues"
+  },
+  "homepage": "https://github.com/garrett-peterson/cse-341-final-project#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
