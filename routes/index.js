@@ -1,20 +1,8 @@
 const express = require('express');
+const router = express.Router();
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('API is running!');
+router.get('/', (req, res) => {
+    res.send('API is working!');
 });
 
-app.get('/api/test', (req, res) => {
-  res.json({
-    message: 'Hello from Express!'
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = router;
