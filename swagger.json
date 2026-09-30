@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SuperMarket API",
-    "description": "SuperMarket API",
+    "title": "CSE 341 Final Project API",
+    "description": "CSE 341 Final Project API",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -12,16 +12,6 @@
   ],
   "paths": {
     "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/test": {
       "get": {
         "description": "",
         "responses": {
