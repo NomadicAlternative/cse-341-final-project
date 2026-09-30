@@ -2,13 +2,17 @@ const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
 
 const getAll = async (req, res) => {
-  //#swagger.tags=['users']
+  //#swagger.tags=['clothings']
   try {
-    const result = await mongodb.getDatabase().db().collection("users").find();
+    const result = await mongodb
+      .getDatabase()
+      .db()
+      .collection("clothings")
+      .find();
     res.setHeader("Content-Type", "application/json");
 
-    const users = await result.toArray();
-    res.status(200).json(users);
+    const clothings = await result.toArray();
+    res.status(200).json(clothings);
   } catch (error) {
     res.setHeader("Content-Type", "application/json");
     res.status(500).json({ message: error.message });
@@ -16,7 +20,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-  //#swagger.tags=['users']
+  //#swagger.tags=['clothings']
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "The ID provided is not valid" });
@@ -25,14 +29,14 @@ const getSingle = async (req, res) => {
     const result = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
+      .collection("clothings")
       .find({ _id: clothingId });
     res.setHeader("Content-Type", "application/json");
 
-    const users = await result.toArray();
+    const clothings = await result.toArray();
 
-    if (users.length > 0) {
-      res.status(200).json(users[0]);
+    if (clothings.length > 0) {
+      res.status(200).json(clothings[0]);
     } else {
       res.status(404).json({ message: "clothing not found" });
     }
@@ -42,24 +46,30 @@ const getSingle = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  //#swagger.tags=['users']
+const createClothing = async (req, res) => {
+  //#swagger.tags=['clothings']
   try {
-    const user = {
-      id: req.body.employeeId,
-      fname: req.body.fname,
-      lname: req.body.lname,
-      role: req.body.role,
+    const clothing = {
+      id: req.body.inMarketId,
+      name: req.body.name,
+      category: req.body.category,
+      size: req.body.size,
+      color: req.body.color,
+      price: req.body.price,
+      inStock: req.body.inStock,
+      material: req.body.material,
+      brand: req.body.brand,
+      careInstructions: req.body.careInstructions,
     };
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
-      .insertOne(user);
+      .collection("clothings")
+      .insertOne(clothing);
     if (response.acknowledged) {
       res.status(201).json(response.insertedId);
     } else {
-      res.status(500).json({ message: "user couldn't be created" });
+      res.status(500).json({ message: "clothing couldn't be created" });
     }
   } catch (error) {
     res.setHeader("Content-Type", "application/json");
@@ -67,29 +77,35 @@ const createUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
-  //#swagger.tags=['users']
+const updateClothing = async (req, res) => {
+  //#swagger.tags=['clothings']
 
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "The ID provided is not valid" });
     }
-    const userId = new ObjectId(req.params.id);
-    const user = {
-      id: req.body.employeeId,
-      fname: req.body.fname,
-      lname: req.body.lname,
-      role: req.body.role,
+    const clothingId = new ObjectId(req.params.id);
+    const clothing = {
+      id: req.body.inMarketId,
+      name: req.body.name,
+      category: req.body.category,
+      size: req.body.size,
+      color: req.body.color,
+      price: req.body.price,
+      inStock: req.body.inStock,
+      material: req.body.material,
+      brand: req.body.brand,
+      careInstructions: req.body.careInstructions,
     };
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
-      .replaceOne({ _id: userId }, user);
+      .collection("clothings")
+      .replaceOne({ _id: clothingId }, clothing);
     if (response.matchedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(404).json({ message: "user not found" });
+      res.status(404).json({ message: "clothing not found" });
     }
   } catch (error) {
     res.setHeader("Content-Type", "application/json");
@@ -97,22 +113,22 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  //#swagger.tags=['users']
+const deleteClothing = async (req, res) => {
+  //#swagger.tags=['clothings']
   try {
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "The ID provided is not valid" });
     }
-    const userId = new ObjectId(req.params.id);
+    const clothingId = new ObjectId(req.params.id);
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
-      .deleteOne({ _id: userId });
+      .collection("clothings")
+      .deleteOne({ _id: clothingId });
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(404).json({ message: "user not found" });
+      res.status(404).json({ message: "clothing not found" });
     }
   } catch (error) {
     res.setHeader("Content-Type", "application/json");
@@ -123,7 +139,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAll,
   getSingle,
-  createUser,
-  updateUser,
-  deleteUser,
+  createClothing,
+  updateClothing,
+  deleteClothing,
 };

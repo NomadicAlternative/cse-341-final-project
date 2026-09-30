@@ -23,6 +23,7 @@ Open a terminal in the project folder and run:
 
 ```bash
 npm install
+npm install express-validator
 ```
 
 This will install all dependencies listed in `package.json`.
