@@ -5,7 +5,7 @@
     "description": "CSE 341 Final Project API",
     "version": "1.0.0"
   },
-  "host": "https://cse-341-final-project-r0ix.onrender.com",
+  "host": "cse-341-final-project-r0ix.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
