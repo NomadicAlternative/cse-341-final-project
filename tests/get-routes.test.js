@@ -94,17 +94,17 @@ describeCollection({
 describeCollection({
   label: "food",
   path: "/food",
-  notFoundMessage: "clothing not found",
+  notFoundMessage: "food not found",
 });
 
 describeCollection({
   label: "furniture",
   path: "/furniture",
-  notFoundMessage: "clothing not found",
+  notFoundMessage: "furniture not found",
 });
 
 describeCollection({
   label: "users",
   path: "/users",
-  notFoundMessage: "clothing not found",
+  notFoundMessage: "user not found",
 });
