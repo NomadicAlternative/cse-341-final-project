@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('./middleware/passport');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const mongodb = require('./data/database');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,7 +27,13 @@ app.use('/', require('./routes'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-    console.log(`Swagger docs: http://localhost:${port}/api-docs`);
+mongodb.initDB((err) => {
+    if (err) {
+        console.error('Failed to connect to MongoDB:', err);
+    } else {
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`);
+            console.log(`Swagger docs: http://localhost:${port}/api-docs`);
+        });
+    }
 });
